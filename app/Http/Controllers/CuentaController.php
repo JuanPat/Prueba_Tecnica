@@ -14,7 +14,7 @@ class CuentaController extends Controller
      */
     public function index()
     {
-        $cuentas = Cuenta::all();
+        $cuentas = Cuenta::orderBy('_id','DESC')->get();
         return view('cuentas.index', compact('cuentas'));
     }
 
@@ -112,6 +112,8 @@ class CuentaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cuenta = Cuenta::find($id);
+        $cuenta->delete();
+        return response()->json(['success' => true]);
     }
 }

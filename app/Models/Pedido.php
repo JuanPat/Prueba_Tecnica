@@ -17,6 +17,6 @@ class Pedido extends Model
     protected $fillable = ['cuenta_id', 'producto', 'cantidad', 'valor', 'total'];
 
     public function cuenta() {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Cuenta::class);
     }
 }

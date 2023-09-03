@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pedido;
+use App\Models\Cuenta;
 
 class PedidoController extends Controller
 {
@@ -13,7 +15,9 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        //
+        $pedidos = Pedido::orderBy('_id','DESC')->get();
+        $cuentas = Cuenta::orderBy('_id','DESC')->get();
+        return view('pedidos.index', compact('pedidos', 'cuentas'));
     }
 
     /**
@@ -34,7 +38,24 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pedido = new Pedido();
+        $pedido->cuenta_id = $request->cuenta_id;
+        $pedido->producto = $request->producto;
+        $pedido->cantidad = $request->cantidad;
+        $pedido->valor = $request->valor;
+        $pedido->total = $request->total_pedido;
+
+        if($pedido->save()) {
+            $response = [
+                'success' => true
+            ];
+        } else {
+            $response = [
+                'success' => false
+            ];
+        }
+
+        return response()->json($response);
     }
 
     /**
@@ -45,7 +66,8 @@ class PedidoController extends Controller
      */
     public function show($id)
     {
-        //
+        $pedido = Pedido::find($id);
+        return response()->json($pedido);
     }
 
     /**
@@ -68,7 +90,24 @@ class PedidoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pedido = Pedido::find($id);
+        $pedido->cuenta_id = $request->cuenta_id;
+        $pedido->producto = $request->producto;
+        $pedido->cantidad = $request->cantidad;
+        $pedido->valor = $request->valor;
+        $pedido->total = $request->total_pedido;
+
+        if($pedido->save()) {
+            $response = [
+                'success' => true
+            ];
+        } else {
+            $response = [
+                'success' => false
+            ];
+        }
+
+        return response()->json($response);
     }
 
     /**
@@ -79,6 +118,8 @@ class PedidoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $pedido = Pedido::find($id);
+        $pedido->delete();
+        return response()->json(['success' => true]);
     }
 }

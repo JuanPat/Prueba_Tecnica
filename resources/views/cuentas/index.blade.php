@@ -2,9 +2,11 @@
 @section('titulo', 'Cuentas')
 @section('contenido')
     @if(count($cuentas) > 0)
-        <h1>Lista de Cuentas</h1>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_nueva_cuenta">Nueva Cuenta</button>
-        <table class="table table-striped" style="margin-top: 20px;">
+        <div style="margin-bottom: 20px;">
+            <h1>Lista de Cuentas</h1>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_nueva_cuenta">Nueva Cuenta</button>
+        </div>
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -15,13 +17,13 @@
             </thead>
             <tbody>
                 @foreach($cuentas as $cuenta)
-                    <tr id="cid{{$cuenta->id}}">
+                    <tr id="cid{{$cuenta->_id}}">
                         <td>{{$cuenta->nombre}}</td>
                         <td>{{$cuenta->email}}</td>
                         <td>{{$cuenta->telefono}}</td>
                         <td>
                             <button type="button" class="btn btn-success btn-sm show_cuenta" data-id="{{$cuenta->id}}">Editar</button>
-                            <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
+                            <button type="button" class="btn btn-danger btn-sm delete_cuenta" data-id="{{$cuenta->id}}">Eliminar</button>
                         </td>
                     </tr>
                 @endforeach

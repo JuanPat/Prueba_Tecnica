@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CuentaController;
+use App\Http\Controllers\PedidoController;
 
 
 /*
@@ -17,6 +18,7 @@ use App\Http\Controllers\CuentaController;
 
 Route::prefix('/')->group(function () {
     Route::resources([
-        'cuenta' => CuentaController::class
+        'cuentas' => CuentaController::class,
+        'pedidos' => PedidoController::class
     ]);
 });
