@@ -17,6 +17,7 @@ use App\Http\Controllers\PedidoController;
 */
 
 Route::prefix('/')->group(function () {
+    Route::get('', [CuentaController::class, 'index']);
     Route::resources([
         'cuentas' => CuentaController::class,
         'pedidos' => PedidoController::class

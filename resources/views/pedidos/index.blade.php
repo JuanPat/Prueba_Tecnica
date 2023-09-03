@@ -20,7 +20,7 @@
             <tbody>
                 @foreach($pedidos as $pedido)
                     <tr id="pid{{$pedido->_id}}">
-                        <td>{{$pedido->cuenta->nombre}}</td>
+                        <td>{{!empty($pedido->cuenta->nombre) ? $pedido->cuenta->nombre : 'Sin Asignar'}}</td>
                         <td>{{$pedido->producto}}</td>
                         <td>{{$pedido->cantidad}}</td>
                         <td>{{"$".number_format($pedido->valor, 0, ",", ".")}}</td>
